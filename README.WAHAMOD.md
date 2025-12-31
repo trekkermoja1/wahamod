@@ -39,6 +39,24 @@ All WAHA Plus features are now available without restrictions:
 - Node.js 22.x (for local development)
 - Yarn 3.6+ (for local development)
 
+### 🎯 Deploy to Coolify (Easiest)
+
+Deploy WAHA MOD to Coolify with one click:
+
+```bash
+# 1. Clone and prepare
+git clone https://github.com/yourusername/wahamod.git
+cd wahamod
+
+# 2. Run setup script
+./coolify-setup.sh
+
+# 3. Follow the interactive wizard
+# 4. Deploy in Coolify using docker-compose.coolify.yml
+```
+
+📚 **Full Coolify deployment guide**: [DEPLOY_COOLIFY.md](DEPLOY_COOLIFY.md)
+
 ### Using Docker (Recommended)
 
 ```bash
