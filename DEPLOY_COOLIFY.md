@@ -19,10 +19,10 @@ This is the easiest method and allows automatic updates.
 #### Step 1: Push to GitHub
 
 ```bash
-# If you haven't already
-cd /mnt/92A816A5A81687BD/waha
-git remote add origin https://github.com/YOUR_USERNAME/wahamod.git
-git push -u origin main
+# Repository already available at:
+# https://github.com/ariaerendev/wahamod
+
+# Or fork it to your own account for customization
 ```
 
 #### Step 2: Create Project in Coolify
@@ -35,10 +35,11 @@ git push -u origin main
 #### Step 3: Configure Docker Compose
 
 1. **Source**: Select "GitHub" or "Git Repository"
-2. **Repository**: Enter your GitHub repo URL
+2. **Repository**: Enter the GitHub repo URL
    ```
-   https://github.com/YOUR_USERNAME/wahamod.git
+   https://github.com/ariaerendev/wahamod.git
    ```
+   (Or use your forked repository)
 3. **Branch**: `main`
 4. **Docker Compose Location**: `docker-compose.coolify.yml`
 
@@ -207,10 +208,10 @@ In Coolify:
 
 ### Auto-Update with GitHub
 
-If you deployed from GitHub:
-1. Push updates to your repository
-2. In Coolify, click **"Redeploy"**
-3. Coolify will pull latest changes and redeploy
+If you deployed from GitHub (https://github.com/ariaerendev/wahamod):
+1. For the official repo: Simply click **"Redeploy"** in Coolify to get latest updates
+2. For your fork: Sync your fork with upstream, then click **"Redeploy"**
+3. Coolify will pull latest changes and redeploy automatically
 
 ### Manual Update
 
@@ -350,7 +351,7 @@ See `docker-compose.coolify.yml` for full configuration options.
 ## ✅ Deployment Checklist
 
 - [ ] Coolify instance ready
-- [ ] Repository pushed to GitHub (if using Option 1)
+- [ ] Clone or fork repository (https://github.com/ariaerendev/wahamod)
 - [ ] Environment variables configured
 - [ ] API key set (changed from default)
 - [ ] Dashboard credentials changed
@@ -368,6 +369,8 @@ See `docker-compose.coolify.yml` for full configuration options.
 ---
 
 **🎉 Your WAHA MOD is now running on Coolify!**
+
+Repository: https://github.com/ariaerendev/wahamod
 
 Access:
 - Dashboard: `https://waha.yourdomain.com/dashboard`

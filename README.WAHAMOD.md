@@ -45,7 +45,7 @@ Deploy WAHA MOD to Coolify with one click:
 
 ```bash
 # 1. Clone and prepare
-git clone https://github.com/yourusername/wahamod.git
+git clone https://github.com/ariaerendev/wahamod.git
 cd wahamod
 
 # 2. Run setup script
