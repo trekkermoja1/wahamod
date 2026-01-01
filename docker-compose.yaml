@@ -29,6 +29,9 @@ services:
       # Save media files
       # https://waha.devlike.pro/docs/how-to/storages/#save-media-files-between-the-container-restarts
       - './media:/app/.media'
+      
+      # Mount patch script for runtime modification
+      - './patch-multisession.sh:/patch-multisession.sh:ro'
 
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/ping"]
