@@ -3,18 +3,22 @@
 # This ensures TypeScript changes are properly compiled to JavaScript
 
 # Stage 1: Build
-FROM node:22-alpine AS builder
+# Using Debian-based image instead of Alpine for better git compatibility
+FROM node:22-slim AS builder
 
-# Install git (required for yarn to clone GitHub dependencies)
-RUN apk add --no-cache git
+# Install required build tools (git for GitHub dependencies, python/make for native modules)
+RUN apt-get update && apt-get install -y \
+    git \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
 
-# Configure git to work in Docker environment
-# Disable autocrlf and other Windows-specific settings that cause errors
+# Configure git for Docker environment
 RUN git config --global core.autocrlf input && \
     git config --global user.email "build@wahamod.local" && \
     git config --global user.name "WAHA Builder" && \
-    git config --global advice.detachedHead false && \
-    git config --global init.defaultBranch main
+    git config --global advice.detachedHead false
 
 WORKDIR /app
 
