@@ -7,6 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: wahamod:latest
+    pull_policy: build
 
     # Add "dns" if you have a problem with resolving "web.whatsapp.com"
     dns:
