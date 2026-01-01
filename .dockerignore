@@ -14,7 +14,8 @@ logo.png
 !entrypoint.sh
 
 # Development
-node_modules
+# NOTE: node_modules is NOT excluded here because builder stage needs to create it
+# dist is excluded because we build it from source
 dist
 .vscode
 .idea
