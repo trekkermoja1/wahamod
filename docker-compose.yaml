@@ -27,6 +27,13 @@ services:
       # https://waha.devlike.pro/docs/how-to/storages/#save-media-files-between-the-container-restarts
       - './media:/app/.media'
 
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/ping"]
+      interval: 1h
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
     env_file:
       - .env
 

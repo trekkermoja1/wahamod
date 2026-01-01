@@ -54,6 +54,10 @@ ENV GODEBUG=netdns=cgo
 WORKDIR /app
 EXPOSE 3000
 
+# Health check runs once per hour to minimize log spam
+HEALTHCHECK --interval=1h --timeout=10s --start-period=60s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ping || exit 1
+
 # Use original WAHA entrypoint
 ENTRYPOINT ["/usr/bin/tini", "--"]
 CMD ["/entrypoint.sh"]
