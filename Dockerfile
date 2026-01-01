@@ -5,6 +5,9 @@
 # Stage 1: Build
 FROM node:22-alpine AS builder
 
+# Install git (required for yarn to clone GitHub dependencies)
+RUN apk add --no-cache git
+
 WORKDIR /app
 
 # Copy all files (except what's in .dockerignore)
