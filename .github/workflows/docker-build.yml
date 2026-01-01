@@ -47,9 +47,9 @@ jobs:
         with:
           context: .
           push: true
+          pull: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          # NO CACHE - fresh build every time until we stabilize
           no-cache: true
           build-args: |
             WHATSAPP_DEFAULT_ENGINE=WEBJS
