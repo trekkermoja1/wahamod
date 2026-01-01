@@ -2,8 +2,11 @@
 services:
   waha:
     restart: always
-    # Use pre-built image from GitHub Container Registry with Plus features
-    image: ghcr.io/ariaerendev/wahamod:latest
+    # Use official WAHA image with runtime patching for multi-session
+    image: devlikeapro/waha:latest
+    
+    # Override entrypoint to apply patch before starting
+    entrypoint: ["/patch-multisession.sh"]
 
     # Add "dns" if you have a problem with resolving "web.whatsapp.com"
     dns:
