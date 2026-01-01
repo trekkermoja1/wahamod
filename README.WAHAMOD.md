@@ -52,7 +52,7 @@ cd wahamod
 ./coolify-setup.sh
 
 # 3. Follow the interactive wizard
-# 4. Deploy in Coolify using docker-compose.coolify.yml
+# 4. Deploy in Coolify using docker-compose.yaml
 ```
 
 📚 **Full Coolify deployment guide**: [DEPLOY_COOLIFY.md](DEPLOY_COOLIFY.md)

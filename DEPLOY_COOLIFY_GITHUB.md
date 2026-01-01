@@ -50,7 +50,7 @@ Di halaman konfigurasi:
   ```
   _(atau URL fork Anda)_
 - **Branch**: `main`
-- **Docker Compose Location**: `docker-compose.coolify.yml`
+- **Docker Compose Location**: `docker-compose.yaml`
 
 **Build Configuration:**
 - **Build Pack**: Docker Compose

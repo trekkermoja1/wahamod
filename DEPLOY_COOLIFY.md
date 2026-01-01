@@ -41,7 +41,7 @@ This is the easiest method and allows automatic updates.
    ```
    (Or use your forked repository)
 3. **Branch**: `main`
-4. **Docker Compose Location**: `docker-compose.coolify.yml`
+4. **Docker Compose Location**: `docker-compose.yaml`
 
 #### Step 4: Configure Environment Variables
 
@@ -344,7 +344,7 @@ Increase resources in Coolify:
 
 ### Configuration Examples
 
-See `docker-compose.coolify.yml` for full configuration options.
+See `docker-compose.yaml` for full configuration options.
 
 ---
 
