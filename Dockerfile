@@ -1,19 +1,20 @@
-# WAHA MOD - Build from Source
-# Builds WAHA from source code with all modifications intact
-# This ensures TypeScript changes are properly compiled to JavaScript
+# WAHA MOD - Build from Source with Pre-built Dependencies
+# Uses official WAHA image for node_modules, then rebuilds TypeScript
 
-# Stage 1: Build
-# Using Debian-based image instead of Alpine for better git compatibility
+# Stage 1: Extract node_modules from official WAHA
+FROM devlikeapro/waha:latest AS official
+
+# Stage 2: Build our source
 FROM node:22-slim AS builder
 
-# Install required build tools (git for GitHub dependencies, build-essential for native modules)
+# Install required build tools
 RUN apt-get update && apt-get install -y \
     git \
     python3 \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Configure git for Docker environment
+# Configure git
 RUN git config --global core.autocrlf input && \
     git config --global user.email "build@wahamod.local" && \
     git config --global user.name "WAHA Builder" && \
@@ -21,16 +22,20 @@ RUN git config --global core.autocrlf input && \
 
 WORKDIR /app
 
-# Copy all files (except what's in .dockerignore)
-COPY . .
+# Copy package files first
+COPY package.json ./
+COPY yarn.lock ./
 
-# Enable corepack for Yarn modern
+# Enable corepack
 RUN corepack enable
 
-# Install dependencies (ignore optional dependencies if they fail to build)
-RUN yarn install --ignore-optional
+# Copy pre-built node_modules from official image (includes compiled libsignal)
+COPY --from=official /app/node_modules ./node_modules
 
-# Build the application (TypeScript -> JavaScript)
+# Copy our source code
+COPY . .
+
+# Build our TypeScript (uses existing node_modules)
 RUN yarn build
 
 # Stage 2: Runtime
