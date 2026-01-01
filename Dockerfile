@@ -27,8 +27,8 @@ COPY . .
 # Enable corepack for Yarn modern
 RUN corepack enable
 
-# Install dependencies
-RUN yarn install
+# Install dependencies (ignore optional dependencies if they fail to build)
+RUN yarn install --ignore-optional
 
 # Build the application (TypeScript -> JavaScript)
 RUN yarn build
