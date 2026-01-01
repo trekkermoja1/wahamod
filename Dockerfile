@@ -19,8 +19,7 @@ RUN node -e "\
   console.log('✅ Patched version.js to always return PLUS');"
 
 # Patch 2: Fix ghost sessions + multi-session support
-# - Remove onlyDefault() calls
-# - Fix exists() to only check running sessions (not storage files)
+# Strategy: Find and replace the exact return statement in exists() method
 RUN node -e "\
   const fs = require('fs'); \
   let code = fs.readFileSync('/app/dist/core/manager.core.js', 'utf8'); \
@@ -28,11 +27,15 @@ RUN node -e "\
   // Remove onlyDefault restrictions\
   code = code.replace(/this\.onlyDefault\([^)]+\);/g, '// PATCHED: Multi-session enabled'); \
   \
-  // Fix exists() - more flexible regex that matches compiled JS\
-  code = code.replace(\
-    /return\s+this\.sessions\.has\(name\)\s*\|\|\s*this\.sessionConfigs\.has\(name\)/g, \
-    'return this.sessions.has(name) /* PATCHED: Ghost sessions fix */'\
-  ); \
+  // Fix exists() method - search for the exact pattern and replace\
+  // This fixes ghost sessions by only checking running sessions, not storage\
+  const beforeExists = code.includes('this.sessionConfigs.has(name)');\
+  if (beforeExists) {\
+    code = code.split('this.sessionConfigs.has(name)').join('false /* PATCHED: Ghost sessions fix - ignore storage */');\
+    console.log('✅ Applied ghost sessions fix');\
+  } else {\
+    console.log('⚠️  Ghost sessions pattern not found, may already be patched');\
+  }\
   \
   fs.writeFileSync('/app/dist/core/manager.core.js', code); \
   console.log('✅ Patched manager.core.js: multi-session + ghost sessions fix');"
@@ -53,6 +56,7 @@ RUN echo "📋 Verification:" && \
     grep -q "return WAHAVersion.PLUS" /app/dist/version.js && echo "  ✓ Version patch OK" || echo "  ✗ Version patch FAILED" && \
     grep -q "PATCHED: Multi-session" /app/dist/core/manager.core.js && echo "  ✓ Multi-session patch OK" || echo "  ✗ Multi-session FAILED" && \
     grep -q "Ghost sessions fix" /app/dist/core/manager.core.js && echo "  ✓ Ghost sessions fix OK" || echo "  ✗ Ghost sessions FAILED" && \
+    (grep "this.sessionConfigs.has(name)" /app/dist/core/manager.core.js && echo "  ✗ WARNING: sessionConfigs still present!" || echo "  ✓ sessionConfigs removed OK") && \
     test -f /app/dist/plus/app.module.plus.js && echo "  ✓ Plus module OK" || echo "  ✗ Plus module FAILED"
 
 # Keep original WAHA configurations
