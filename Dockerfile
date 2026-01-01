@@ -35,6 +35,9 @@ COPY --from=official /app/node_modules ./node_modules
 # Copy our source code
 COPY . .
 
+# Verify/update dependencies (fast since node_modules already exist)
+RUN yarn install
+
 # Build our TypeScript (uses existing node_modules)
 RUN yarn build
 
