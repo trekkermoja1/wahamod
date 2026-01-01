@@ -5,17 +5,22 @@ services:
     # Use official WAHA image with runtime patching for multi-session
     image: devlikeapro/waha:latest
     
-    # Inline patch script for Coolify compatibility
-    command: >
-      sh -c '
-      if [ -f /app/dist/core/manager.core.js ]; then
-        echo "🔧 Patching WAHA for multi-session support...";
-        cp /app/dist/core/manager.core.js /app/dist/core/manager.core.js.backup;
-        sed -i "s/if (await this.exists(name))/if (false \&\& await this.exists(name))/g" /app/dist/core/manager.core.js;
-        echo "✅ Multi-session patch applied!";
-      fi;
-      exec /entrypoint.sh
-      '
+    # Inline patch: override entrypoint to patch then start normally
+    entrypoint: 
+      - /bin/sh
+      - -c
+      - |
+        echo "🔧 Applying multi-session patch..."
+        if [ -f /app/dist/core/manager.core.js ]; then
+          cp /app/dist/core/manager.core.js /app/dist/core/manager.core.js.backup
+          # Patch onlyDefault method to return immediately (no-op)
+          sed -i 's/onlyDefault(name) {/onlyDefault(name) { return;/g' /app/dist/core/manager.core.js
+          echo "✅ Patch applied successfully!"
+        else
+          echo "⚠️  Manager file not found, skipping patch"
+        fi
+        echo "🚀 Starting WAHA..."
+        exec node dist/main.js
 
     # Add "dns" if you have a problem with resolving "web.whatsapp.com"
     dns:
