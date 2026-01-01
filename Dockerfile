@@ -59,7 +59,7 @@ RUN apk add --no-cache \
 RUN addgroup -S waha && adduser -S waha -G waha
 WORKDIR /app
 
-# Copy built application from builder
+# Copy built application from builder (v2 - force cache invalidation)
 COPY --from=builder --chown=waha:waha /app/dist ./dist
 COPY --from=builder --chown=waha:waha /app/node_modules ./node_modules
 COPY --from=builder --chown=waha:waha /app/package.json ./
