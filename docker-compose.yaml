@@ -21,7 +21,7 @@ services:
         max-file: '10'
 
     ports:
-      - '127.0.0.1:3000:3000/tcp'
+      - '3000:3000'
 
     volumes:
       # Store sessions in the .sessions folder (comment it if you're using MongoDB)
