@@ -9,8 +9,9 @@
 CNAME
 logo.png
 
-# Scripts
+# Scripts (except entrypoint.sh which is needed for runtime)
 *.sh
+!entrypoint.sh
 
 # Development
 node_modules
