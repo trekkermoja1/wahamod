@@ -297,7 +297,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
         'Should not restart the client, ignoring restart request',
       );
       this.end().catch((error) => {
-        this.logger.error(error, 'Failed to end() the client');
+        this.logger.error({ error }, 'Failed to end() the client');
       });
       return;
     }
@@ -396,7 +396,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
     this.status = WAHASessionStatus.STARTING;
     await this.init().catch((err) => {
       this.logger.error('Failed to start the client');
-      this.logger.error(err, err.stack);
+      this.logger.error({ err }, err.stack);
       this.failed();
     });
     return this;
@@ -459,7 +459,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
       await this.whatsapp?.destroy();
       this.logger.debug('Successfully destroyed whatsapp client');
     } catch (error) {
-      this.logger.error(error, 'Failed to destroy whatsapp client');
+      this.logger.error({ error }, 'Failed to destroy whatsapp client');
     }
 
     try {
@@ -468,7 +468,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
       await strategy?.destroy();
       this.logger.debug('Successfully destroyed auth strategy');
     } catch (error) {
-      this.logger.error(error, 'Failed to destroy auth strategy');
+      this.logger.error({ error }, 'Failed to destroy auth strategy');
     }
   }
 
@@ -523,7 +523,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
         }
       } catch (err) {
         this.logger.warn('Failed to hide "Fresh look" modal');
-        this.logger.warn(err, err.stack);
+        this.logger.warn({ err }, err.stack);
       }
     });
 
@@ -2115,7 +2115,7 @@ export class WhatsappSessionWebJSCore extends WhatsappSession {
       return await this.downloadMedia(message);
     } catch (e) {
       this.logger.error('Failed when tried to download media for a message');
-      this.logger.error(e, e.stack);
+      this.logger.error({ err: e }, e.stack);
     }
     return null;
   }

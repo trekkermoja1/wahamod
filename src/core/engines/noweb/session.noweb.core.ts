@@ -305,7 +305,7 @@ export class WhatsappSessionNoWebCore extends WhatsappSession {
     this.status = WAHASessionStatus.STARTING;
     this.buildClient().catch((err) => {
       this.logger.error('Failed to start the client');
-      this.logger.error(err, err.stack);
+      this.logger.error({ err }, err.stack);
       this.status = WAHASessionStatus.FAILED;
       this.restartClient();
     });
@@ -594,7 +594,7 @@ export class WhatsappSessionNoWebCore extends WhatsappSession {
       this.logger.info('Saving creds before stopping...');
       await this.authNOWEBStore.saveCreds().catch((e) => {
         this.logger.error('Failed to save creds');
-        this.logger.error(e, e.stack);
+        this.logger.error({ err: e }, e.stack);
       });
       this.logger.info('Creds saved');
     }
@@ -606,7 +606,7 @@ export class WhatsappSessionNoWebCore extends WhatsappSession {
     await this.store?.close();
     this.authNOWEBStore?.close().catch((err) => {
       this.logger.error('Failed to close NOWEB auth store');
-      this.logger.error(err, err.stack);
+      this.logger.error({ err }, err.stack);
     });
   }
 
@@ -1798,7 +1798,7 @@ export class WhatsappSessionNoWebCore extends WhatsappSession {
       return resp;
     } catch (err) {
       logger.error(`Sending status message (${index + 1} chunk - failed`);
-      logger.error(err, err.stack);
+      logger.error({ err }, err.stack);
       throw err;
     }
   }
@@ -2675,7 +2675,7 @@ export class WhatsappSessionNoWebCore extends WhatsappSession {
       return await this.downloadMedia(message);
     } catch (e) {
       this.logger.error('Failed when tried to download media for a message');
-      this.logger.error(e, e.stack);
+      this.logger.error({ err: e }, e.stack);
     }
     return null;
   }

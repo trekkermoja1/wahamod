@@ -86,7 +86,7 @@ export class WebsocketGatewayCore
     const sub = this.manager
       .getSessionEvents(session, events)
       .subscribe((data) => {
-        this.logger.debug(`Sending data to client, event.id: ${data.id}`, data);
+        this.logger.debug({ data }, `Sending data to client, event.id: ${data.id}`);
         socket.send(JSON.stringify(data), (err) => {
           if (!err) {
             return;

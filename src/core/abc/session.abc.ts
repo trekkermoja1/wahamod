@@ -242,7 +242,7 @@ export abstract class WhatsappSession {
               this.logger.error(
                 `Caught error, dropping value from, event: '${key}'`,
               );
-              this.logger.error(err, err.stack);
+              this.logger.error({ err }, err.stack);
               throw err;
             }),
             filter(Boolean),
@@ -494,7 +494,7 @@ export abstract class WhatsappSession {
         })
         .catch((err) => {
           this.logger.error('Error refreshing my profile picture after update');
-          this.logger.error(err, err.stack);
+          this.logger.error({ err }, err.stack);
         });
     }, 3_000);
 
@@ -883,7 +883,7 @@ export abstract class WhatsappSession {
     this.profilePictures.del(id);
     const url = await fn.catch((err) => {
       this.logger.warn('Error fetching profile picture');
-      this.logger.warn(err, err.stack);
+      this.logger.warn({ err }, err.stack);
       return null;
     });
     this.profilePictures.set(id, url);
@@ -988,7 +988,7 @@ export abstract class WhatsappSession {
         })
         .catch((err) => {
           this.logger.error('Error refreshing my profile picture after update');
-          this.logger.error(err, err.stack);
+          this.logger.error({ err }, err.stack);
         });
     }, 3_000);
 

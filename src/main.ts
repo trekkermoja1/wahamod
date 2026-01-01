@@ -103,11 +103,11 @@ async function bootstrap() {
   const config = app.get(WhatsappConfigService);
   await app.listen(config.port);
   logger.info(`WhatsApp HTTP API is running on: ${await app.getUrl()}`);
-  logger.info(VERSION, 'Environment');
+  logger.info({ version: VERSION }, 'Environment');
 }
 
 bootstrap().catch((error) => {
-  logger.error(error, `Failed to start WAHA: ${error}`);
+  logger.error({ error }, `Failed to start WAHA: ${error}`);
   // @ts-ignore
   logger.error(error.stack);
   process.exit(1);

@@ -126,7 +126,7 @@ export class ChatWootAppService implements IAppService {
   afterSessionStart(app: App<ChatWootAppConfig>, session: WhatsappSession) {
     this.chatWootScheduleService.schedule(app.id, session.name).catch((err) => {
       this.logger.error('Error scheduling session for ChatWoot');
-      this.logger.error(err, err.stack);
+      this.logger.error({ err }, err.stack);
     });
   }
 

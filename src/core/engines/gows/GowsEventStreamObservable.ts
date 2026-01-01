@@ -71,7 +71,7 @@ export class GowsEventStreamObservable extends Observable<EnginePayload> {
           await cleanup('cancelled');
           return;
         }
-        logger.error(err, 'Stream error');
+        logger.error({ err }, 'Stream error');
         await cleanup('error');
         // Give some time to node event loop to process the error
         await sleep(100);

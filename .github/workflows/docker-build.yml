@@ -49,7 +49,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # Disable cache temporarily to fix cache invalidation issues
+          no-cache: true
           build-args: |
             WHATSAPP_DEFAULT_ENGINE=WEBJS

@@ -82,7 +82,7 @@ export class LocalAuth implements AuthStrategy {
             force: true,
           });
         } catch (err) {
-          this.logger.error(err, `Error deleting: ${filePath}`);
+          this.logger.error({ err }, `Error deleting: ${filePath}`);
         }
       }
     }
@@ -107,7 +107,7 @@ export class LocalAuth implements AuthStrategy {
         force: true,
       });
     } catch (err) {
-      this.logger.error(err, `Error deleting: ${path}`);
+      this.logger.error({ err }, `Error deleting: ${path}`);
     }
   }
 

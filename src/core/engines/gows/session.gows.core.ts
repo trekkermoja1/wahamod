@@ -292,7 +292,7 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
       await promisify(this.client.StartSession)(request);
     } catch (err) {
       this.logger.error('Failed to start the client');
-      this.logger.error(err, err.stack);
+      this.logger.error({ err }, err.stack);
       this.status = WAHASessionStatus.FAILED;
       throw err;
     }
@@ -372,7 +372,7 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
         return;
       }
       if (data.Event != 'code') {
-        this.logger.warn(data, 'Failed QR item event');
+        this.logger.warn({ data }, 'Failed QR item event');
         this.status = WAHASessionStatus.FAILED;
         return;
       }
@@ -2152,7 +2152,7 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
       return await this.downloadMedia(message);
     } catch (e) {
       this.logger.error('Failed when tried to download media for a message');
-      this.logger.error(e, e.stack);
+      this.logger.error({ err: e }, e.stack);
       return null;
     }
   }
@@ -2188,7 +2188,7 @@ export class WhatsappSessionGoWSCore extends WhatsappSession {
       this.logger.error(
         'Failed to resolve proto message from GOWS to JS format',
       );
-      this.logger.error(e, e.stack);
+      this.logger.error({ err: e }, e.stack);
     }
 
     return {
