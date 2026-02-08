@@ -4,7 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
-packages = ["python3", "pkg-config", "vips", "sqlite"]
+packages = ["python3", "pkg-config", "vips", "sqlite", "unzip"]
 
 [userenv]
 
