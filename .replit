@@ -1,0 +1,51 @@
+modules = ["nodejs-20", "web", "bash"]
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["python3"]
+
+[userenv]
+
+[userenv.shared]
+WHATSAPP_API_PORT = "5000"
+WHATSAPP_DEFAULT_ENGINE = "NOWEB"
+WAHA_DASHBOARD_ENABLED = "true"
+WAHA_SWAGGER_ENABLED = "true"
+WAHA_PRINT_QR = "true"
+WAHA_LOG_LEVEL = "info"
+WHATSAPP_API_HOSTNAME = "0.0.0.0"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export PATH=~/bin:$PATH && cd /home/runner/workspace && node dist/main"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "vm"
+run = ["bash", "-c", "export PATH=~/bin:$PATH && node dist/main"]
+build = ["bash", "-c", "export PATH=~/bin:$PATH && corepack prepare yarn@4.9.2 --activate && corepack enable --install-directory ~/bin && yarn install --no-immutable && npx nest build"]
