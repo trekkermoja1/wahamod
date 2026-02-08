@@ -1,0 +1,82 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ACK_UNKNOWN = exports.WAMessageAckName = exports.WAMessageAck = exports.WAHAPresenceStatus = exports.WAHAEngine = exports.WAHASessionStatus = exports.WAHAEventsWild = exports.AllEvents = exports.WAHAEvents = exports.SECOND = void 0;
+const openapi = require("@nestjs/swagger");
+exports.SECOND = 1000;
+var WAHAEvents;
+(function (WAHAEvents) {
+    WAHAEvents["SESSION_STATUS"] = "session.status";
+    WAHAEvents["MESSAGE"] = "message";
+    WAHAEvents["MESSAGE_REACTION"] = "message.reaction";
+    WAHAEvents["MESSAGE_ANY"] = "message.any";
+    WAHAEvents["MESSAGE_ACK"] = "message.ack";
+    WAHAEvents["MESSAGE_ACK_GROUP"] = "message.ack.group";
+    WAHAEvents["MESSAGE_WAITING"] = "message.waiting";
+    WAHAEvents["MESSAGE_REVOKED"] = "message.revoked";
+    WAHAEvents["MESSAGE_EDITED"] = "message.edited";
+    WAHAEvents["STATE_CHANGE"] = "state.change";
+    WAHAEvents["GROUP_JOIN"] = "group.join";
+    WAHAEvents["GROUP_LEAVE"] = "group.leave";
+    WAHAEvents["GROUP_V2_JOIN"] = "group.v2.join";
+    WAHAEvents["GROUP_V2_LEAVE"] = "group.v2.leave";
+    WAHAEvents["GROUP_V2_UPDATE"] = "group.v2.update";
+    WAHAEvents["GROUP_V2_PARTICIPANTS"] = "group.v2.participants";
+    WAHAEvents["PRESENCE_UPDATE"] = "presence.update";
+    WAHAEvents["POLL_VOTE"] = "poll.vote";
+    WAHAEvents["POLL_VOTE_FAILED"] = "poll.vote.failed";
+    WAHAEvents["CHAT_ARCHIVE"] = "chat.archive";
+    WAHAEvents["CALL_RECEIVED"] = "call.received";
+    WAHAEvents["CALL_ACCEPTED"] = "call.accepted";
+    WAHAEvents["CALL_REJECTED"] = "call.rejected";
+    WAHAEvents["LABEL_UPSERT"] = "label.upsert";
+    WAHAEvents["LABEL_DELETED"] = "label.deleted";
+    WAHAEvents["LABEL_CHAT_ADDED"] = "label.chat.added";
+    WAHAEvents["LABEL_CHAT_DELETED"] = "label.chat.deleted";
+    WAHAEvents["EVENT_RESPONSE"] = "event.response";
+    WAHAEvents["EVENT_RESPONSE_FAILED"] = "event.response.failed";
+    WAHAEvents["ENGINE_EVENT"] = "engine.event";
+})(WAHAEvents || (exports.WAHAEvents = WAHAEvents = {}));
+exports.AllEvents = [...Object.values(WAHAEvents), '*'];
+exports.WAHAEventsWild = Object.values(WAHAEvents).filter((e) => e !== WAHAEvents.STATE_CHANGE && e !== WAHAEvents.ENGINE_EVENT);
+var WAHASessionStatus;
+(function (WAHASessionStatus) {
+    WAHASessionStatus["STOPPED"] = "STOPPED";
+    WAHASessionStatus["STARTING"] = "STARTING";
+    WAHASessionStatus["SCAN_QR_CODE"] = "SCAN_QR_CODE";
+    WAHASessionStatus["WORKING"] = "WORKING";
+    WAHASessionStatus["FAILED"] = "FAILED";
+})(WAHASessionStatus || (exports.WAHASessionStatus = WAHASessionStatus = {}));
+var WAHAEngine;
+(function (WAHAEngine) {
+    WAHAEngine["WEBJS"] = "WEBJS";
+    WAHAEngine["NOWEB"] = "NOWEB";
+    WAHAEngine["GOWS"] = "GOWS";
+})(WAHAEngine || (exports.WAHAEngine = WAHAEngine = {}));
+var WAHAPresenceStatus;
+(function (WAHAPresenceStatus) {
+    WAHAPresenceStatus["OFFLINE"] = "offline";
+    WAHAPresenceStatus["ONLINE"] = "online";
+    WAHAPresenceStatus["TYPING"] = "typing";
+    WAHAPresenceStatus["RECORDING"] = "recording";
+    WAHAPresenceStatus["PAUSED"] = "paused";
+})(WAHAPresenceStatus || (exports.WAHAPresenceStatus = WAHAPresenceStatus = {}));
+var WAMessageAck;
+(function (WAMessageAck) {
+    WAMessageAck[WAMessageAck["ERROR"] = -1] = "ERROR";
+    WAMessageAck[WAMessageAck["PENDING"] = 0] = "PENDING";
+    WAMessageAck[WAMessageAck["SERVER"] = 1] = "SERVER";
+    WAMessageAck[WAMessageAck["DEVICE"] = 2] = "DEVICE";
+    WAMessageAck[WAMessageAck["READ"] = 3] = "READ";
+    WAMessageAck[WAMessageAck["PLAYED"] = 4] = "PLAYED";
+})(WAMessageAck || (exports.WAMessageAck = WAMessageAck = {}));
+var WAMessageAckName;
+(function (WAMessageAckName) {
+    WAMessageAckName["ERROR"] = "ERROR";
+    WAMessageAckName["PENDING"] = "PENDING";
+    WAMessageAckName["SERVER"] = "SERVER";
+    WAMessageAckName["DEVICE"] = "DEVICE";
+    WAMessageAckName["READ"] = "READ";
+    WAMessageAckName["PLAYED"] = "PLAYED";
+})(WAMessageAckName || (exports.WAMessageAckName = WAMessageAckName = {}));
+exports.ACK_UNKNOWN = 'UNKNOWN';
+//# sourceMappingURL=enums.dto.js.map

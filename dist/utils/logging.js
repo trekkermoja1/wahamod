@@ -1,0 +1,73 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getPinoLogLevel = getPinoLogLevel;
+exports.isDebugEnabled = isDebugEnabled;
+exports.getPinoHttpUseLevel = getPinoHttpUseLevel;
+exports.getDefaultPinoLogLevel = getDefaultPinoLogLevel;
+exports.getPinoTransport = getPinoTransport;
+exports.getNestJSLogLevels = getNestJSLogLevels;
+function getNestJSLogLevels() {
+    const level = getPinoLogLevel();
+    switch (level) {
+        case 'trace':
+            return ['error', 'warn', 'log', 'debug', 'verbose'];
+        case 'debug':
+            return ['error', 'warn', 'log', 'debug'];
+        case 'info':
+            return ['error', 'warn', 'log'];
+        case 'warn':
+            return ['error', 'warn'];
+        case 'error':
+            return ['error', 'warn'];
+        default:
+            return ['error', 'warn', 'log'];
+    }
+}
+function getPinoLogLevel(debug = false) {
+    const enableDebug = process.env.DEBUG != undefined || debug;
+    const level = getDefaultPinoLogLevel();
+    if (level === 'trace') {
+        return 'trace';
+    }
+    if (enableDebug) {
+        return 'debug';
+    }
+    return level;
+}
+function isDebugEnabled() {
+    const level = getPinoLogLevel();
+    return level == 'debug' || level == 'trace';
+}
+function getPinoHttpUseLevel() {
+    const levels = ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
+    const level = (process.env.WAHA_HTTP_LOG_LEVEL || 'info').toLowerCase();
+    if (!levels.includes(level)) {
+        console.error(`Unknown ${process.env.WAHA_HTTP_LOG_LEVEL}' value for WAHA_HTTP_LOG_LEVEL`);
+        return 'info';
+    }
+    return level;
+}
+function getDefaultPinoLogLevel() {
+    const logLevel = (process.env.WAHA_LOG_LEVEL || 'info').toLowerCase();
+    const levels = ['fatal', 'error', 'warn', 'info', 'debug', 'trace'];
+    if (!levels.includes(logLevel)) {
+        console.error(`Unknown ${process.env.WAHA_LOG_LEVEL}' value for WAHA_LOG_LEVEL`);
+        return 'info';
+    }
+    return logLevel;
+}
+function getPinoTransport() {
+    const logFormat = (process.env.WAHA_LOG_FORMAT || 'PRETTY').toUpperCase();
+    if (logFormat == 'JSON') {
+        return undefined;
+    }
+    return {
+        target: 'pino-pretty',
+        options: {
+            singleLine: true,
+            colorize: true,
+            messageFormat: '{if session} session:{session} - {end}{msg}',
+        },
+    };
+}
+//# sourceMappingURL=logging.js.map

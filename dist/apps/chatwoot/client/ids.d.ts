@@ -1,0 +1,10 @@
+import { AttributeKey } from '@waha/apps/chatwoot/const';
+import { WhatsAppMessage } from '@waha/apps/chatwoot/storage';
+export declare function GetJID(contact: any): string | null;
+export declare function GetLID(contact: any): string | null;
+export declare function GetChatID(contact: any): string | null;
+export declare function GetAllChatIDs(contact: any): Array<string>;
+export declare function FindChatID(contact: any): string | null;
+export declare function SerializeWhatsAppKey(message: WhatsAppMessage): string;
+export declare function ContactAttr(chatId: string): AttributeKey;
+export declare function IsCommandsChat(body: any): boolean;

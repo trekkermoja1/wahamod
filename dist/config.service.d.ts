@@ -1,0 +1,38 @@
+import { OnApplicationBootstrap } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { IgnoreJidConfig } from '@waha/core/utils/jids';
+import { WebhookConfig } from './structures/webhooks.config.dto';
+export declare class WhatsappConfigService implements OnApplicationBootstrap {
+    private configService;
+    private logger;
+    private webhookConfig;
+    constructor(configService: ConfigService);
+    get schema(): any;
+    get hostname(): string;
+    get port(): string;
+    get baseUrl(): string;
+    get workerId(): string;
+    get shouldRestartWorkerSessions(): boolean;
+    get autoStartDelaySeconds(): number;
+    get mimetypes(): string[];
+    get shouldDownloadMedia(): boolean;
+    get startSessions(): string[];
+    get shouldRestartAllSessions(): boolean;
+    get proxyServer(): string[] | string | undefined;
+    get proxyServerIndexPrefix(): string | undefined;
+    get proxyServerUsername(): string | undefined;
+    get proxyServerPassword(): string | undefined;
+    getWebhookConfig(): WebhookConfig | undefined;
+    getSessionMongoUrl(): string | undefined;
+    getSessionPostgresUrl(): string | undefined;
+    get(name: string, defaultValue?: any): any;
+    getApiKey(): string | undefined;
+    getExcludedPaths(): string[];
+    getExcludedFullPaths(): string[];
+    getHealthMediaFilesThreshold(): number;
+    getHealthSessionFilesThreshold(): number;
+    getHealthMongoTimeout(): number;
+    get debugModeEnabled(): boolean;
+    getIgnoreChatsConfig(): IgnoreJidConfig;
+    onApplicationBootstrap(): void;
+}

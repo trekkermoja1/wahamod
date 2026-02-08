@@ -1,0 +1,1 @@
+{"version":3,"file":"query.dto.js","sourceRoot":"","sources":["../../../../src/apps/app_sdk/dto/query.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;;AAAA,6CAA8C;AAC9C,qDAAuD;AAEvD,MAAa,aAAa;;;;CASzB;AATD,sCASC;AADC;IAPC,IAAA,qBAAW,EAAC;QACX,OAAO,EAAE,SAAS;QAClB,QAAQ,EAAE,IAAI;QACd,WAAW,EAAE,+BAA+B;KAC7C,CAAC;IACD,IAAA,0BAAQ,GAAE;IACV,IAAA,4BAAU,GAAE;;8CACG"}

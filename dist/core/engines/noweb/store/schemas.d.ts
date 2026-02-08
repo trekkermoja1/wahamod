@@ -1,0 +1,10 @@
+import { Schema } from '@waha/core/storage/Schema';
+export declare const NowebContactSchema: Schema;
+export declare const NowebChatSchema: Schema;
+export declare const NowebGroupsSchema: Schema;
+export declare const NowebMessagesSchema: Schema;
+export declare const NowebLabelsSchema: Schema;
+export declare const NowebLabelAssociationsSchema: Schema;
+export declare const NowebLidMapSchema: Schema;
+export declare const NOWEB_STORE_SCHEMA: Schema[];
+export declare const Migrations: string[];

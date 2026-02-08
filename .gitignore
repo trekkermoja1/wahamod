@@ -9,10 +9,6 @@ node_modules/
 !.yarn/sdks
 !.yarn/versions
 
-# Build output
-/dist
-/build
-*.js.map
 
 # Logs
 logs

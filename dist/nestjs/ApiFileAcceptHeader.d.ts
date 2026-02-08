@@ -1,0 +1,1 @@
+export declare function ApiFileAcceptHeader(mimetype: string, ...models: any[]): <TFunction extends Function, Y>(target: TFunction | object, propertyKey?: string | symbol, descriptor?: TypedPropertyDescriptor<Y>) => void;

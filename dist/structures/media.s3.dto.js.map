@@ -1,0 +1,1 @@
+{"version":3,"file":"media.s3.dto.js","sourceRoot":"","sources":["../../src/structures/media.s3.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;;AAAA,6CAA8C;AAE9C,MAAa,WAAW;;;;CAYvB;AAZD,kCAYC;AAPC;IAJC,IAAA,qBAAW,EAAC;QACX,WAAW,EAAE,2BAA2B;QACxC,OAAO,EAAE,WAAW;KACrB,CAAC;;2CACa;AAMf;IAJC,IAAA,qBAAW,EAAC;QACX,WAAW,EAAE,wCAAwC;QACrD,OAAO,EAAE,yDAAyD;KACnE,CAAC;;wCACU"}
