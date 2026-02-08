@@ -4,7 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
-packages = ["python3"]
+packages = ["python3", "pkg-config", "vips", "sqlite"]
 
 [userenv]
 
@@ -48,4 +48,4 @@ externalPort = 80
 [deployment]
 deploymentTarget = "vm"
 run = ["bash", "-c", "export PATH=~/bin:$PATH && node dist/main"]
-build = ["bash", "-c", "export PATH=~/bin:$PATH && corepack prepare yarn@4.9.2 --activate && corepack enable --install-directory ~/bin && yarn install --no-immutable && npx nest build"]
+build = ["bash", "-c", "export PATH=~/bin:$PATH && yarn install && npx nest build"]
