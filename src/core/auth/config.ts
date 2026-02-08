@@ -66,7 +66,7 @@ export class AuthConfig {
     }
     this.key = FromEnv(
       'WAHA_API_KEY',
-      parseBool(process.env.WAHA_NO_API_KEY),
+      true,
       rand(),
       keys,
     );

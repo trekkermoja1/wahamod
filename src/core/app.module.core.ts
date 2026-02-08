@@ -118,6 +118,10 @@ export const IMPORTS_CORE = [
           rootPath: join(__dirname, '..', 'dashboard'),
           serveRoot: dashboardConfig.dashboardUri,
         },
+        {
+          rootPath: join(__dirname, '..', 'dashboard'),
+          serveRoot: '/dashboard',
+        },
       ];
     },
   }),

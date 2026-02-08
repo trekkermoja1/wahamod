@@ -16,6 +16,13 @@ WAHA_SWAGGER_ENABLED = "true"
 WAHA_PRINT_QR = "true"
 WAHA_LOG_LEVEL = "info"
 WHATSAPP_API_HOSTNAME = "0.0.0.0"
+WHATSAPP_SWAGGER_USERNAME = "admin"
+WAHA_DASHBOARD_USERNAME = "admin"
+WAHA_NO_API_KEY = "true"
+WHATSAPP_SWAGGER_NO_PASSWORD = "true"
+WAHA_DASHBOARD_NO_PASSWORD = "true"
+WAHA_DASHBOARD_URL = "https://8ee0e6df-1c49-4a15-81cc-c10ad5ee3a96-00-2gpxxhezu3qb3.riker.replit.dev/dashboard/"
+WHATSAPP_API_EXTERNAL_URL = "https://8ee0e6df-1c49-4a15-81cc-c10ad5ee3a96-00-2gpxxhezu3qb3.riker.replit.dev/"
 
 [workflows]
 runButton = "Project"
