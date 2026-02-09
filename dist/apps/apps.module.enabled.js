@@ -1,14 +1,72 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppsEnabled = void 0;
+const bullmq_1 = require("@nestjs/bullmq");
+const nestjs_redis_1 = require("@liaoliaots/nestjs-redis");
+const rmutex_1 = require("../modules/rmutex");
+const nestjs_1 = require("@bull-board/nestjs");
+const express_1 = require("@bull-board/express");
+const auth_1 = require("./app_sdk/auth");
 const apps_controller_1 = require("./app_sdk/api/apps.controller");
 const IAppsService_1 = require("./app_sdk/services/IAppsService");
 const AppsEnabledService_1 = require("./app_sdk/services/AppsEnabledService");
 const config_1 = require("../core/auth/config");
 const AppRuntime_1 = require("./app_sdk/apps/AppRuntime");
 const name_1 = require("./app_sdk/apps/name");
-const QUEUES_IMPORTS_REQUIRED = [];
-const QUEUES_IMPORTS = [];
+const QUEUES_IMPORTS_REQUIRED = [
+    bullmq_1.BullModule.forRoot({
+        connection: {
+            url: process.env.REDIS_URL || 'redis://:redis@localhost:6379',
+            maxRetriesPerRequest: null,
+        },
+        prefix: `waha-${process.env.WAHA_WORKER_ID}`,
+    }),
+    nestjs_redis_1.RedisModule.forRoot({
+        closeClient: true,
+        config: {
+            url: process.env.REDIS_URL || 'redis://:redis@localhost:6379',
+            onClientCreated: async (client) => {
+                try {
+                    await client.ping();
+                }
+                catch (err) {
+                    console.error('[Redis] Connection failed:', err);
+                }
+            },
+        },
+    }),
+    rmutex_1.RMutexModule,
+    nestjs_1.BullBoardModule.forRoot({
+        route: '/jobs',
+        adapter: express_1.ExpressAdapter,
+        middleware: (0, auth_1.BullAuthMiddleware)(),
+        boardOptions: {
+            uiConfig: {
+                boardTitle: 'Jobs | WAHA',
+                boardLogo: {
+                    path: '/dashboard/layout/images/logo-white.svg',
+                    width: 35,
+                    height: 35,
+                },
+                favIcon: {
+                    default: '/dashboard/favicon.ico',
+                    alternative: '/dashboard/favicon.ico',
+                },
+                miscLinks: [
+                    {
+                        text: '📊 Dashboard',
+                        url: '/dashboard',
+                    },
+                    {
+                        text: '📚 Swagger (OpenAPI)',
+                        url: '/',
+                    },
+                ],
+            },
+        },
+    }),
+];
+const QUEUES_IMPORTS = process.env.REDIS_URL ? QUEUES_IMPORTS_REQUIRED : [];
 function getAppModule(name) {
     if (!AppRuntime_1.AppRuntimeConfig.HasApp(name)) {
         return {

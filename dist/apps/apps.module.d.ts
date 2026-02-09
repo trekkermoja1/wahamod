@@ -1,5 +1,5 @@
 export declare const AppsModuleExports: {
-    imports: any[];
+    imports: (import("@nestjs/common").DynamicModule | typeof import("../modules/rmutex").RMutexModule)[];
     controllers: typeof import("./app_sdk/api/apps.controller").AppsController[];
     providers: {
         provide: symbol;
