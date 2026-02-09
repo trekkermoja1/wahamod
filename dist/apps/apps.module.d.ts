@@ -1,15 +1,15 @@
 export declare const AppsModuleExports: {
     imports: any[];
-    controllers: any[];
-    providers: (typeof import("./calls/services/CallsAppService").CallsAppService | typeof import("./chatwoot/consumers/inbox/message_created").ChatWootInboxMessageCreatedConsumer | typeof import("./chatwoot/consumers/inbox/message_updated").ChatWootInboxMessageUpdatedConsumer | typeof import("./chatwoot/consumers/inbox/message_deleted").ChatWootInboxMessageDeletedConsumer | typeof import("./chatwoot/consumers/inbox/conversation_created").ChatWootConversationCreatedConsumer | typeof import("./chatwoot/consumers/inbox/conversation_status_changed").ChatWootConversationStatusChangedConsumer | typeof import("./chatwoot/consumers/inbox/commands").ChatWootInboxCommandsConsumer | typeof import("./chatwoot/consumers/task/contacts.pull").TaskContactsPullConsumer | typeof import("./chatwoot/consumers/task/messages.pull").TaskMessagesPullConsumer | typeof import("./chatwoot/consumers/waha/session.status").WAHASessionStatusConsumer | typeof import("./chatwoot/consumers/waha/message.any").WAHAMessageAnyConsumer | typeof import("./chatwoot/consumers/waha/message.reaction").WAHAMessageReactionConsumer | typeof import("./chatwoot/consumers/waha/message.edited").WAHAMessageEditedConsumer | typeof import("./chatwoot/consumers/waha/message.revoked").WAHAMessageRevokedConsumer | typeof import("./chatwoot/consumers/waha/message.ack").WAHAMessageAckConsumer | typeof import("./chatwoot/consumers/waha/call.received").WAHACallReceivedConsumer | typeof import("./chatwoot/consumers/waha/call.accepted").WAHACallAcceptedConsumer | typeof import("./chatwoot/consumers/waha/call.rejected").WAHACallRejectedConsumer | typeof import("./chatwoot/consumers/scheduled/message.cleanup").MessageCleanupConsumer | typeof import("./chatwoot/consumers/scheduled/check.version").CheckVersionConsumer | typeof import("./chatwoot/services/ChatWootWAHAQueueService").ChatWootWAHAQueueService | typeof import("./chatwoot/services/ChatWootQueueService").ChatWootQueueService | typeof import("./chatwoot/services/ChatWootScheduleService").ChatWootScheduleService | typeof import("./chatwoot/services/ChatWootAppService").ChatWootAppService | typeof import("./chatwoot/services/QueueRegistry").QueueRegistry | typeof import("./chatwoot/services/QueueManager").QueueManager | {
+    controllers: typeof import("./app_sdk/api/apps.controller").AppsController[];
+    providers: {
         provide: symbol;
         useClass: typeof import("./app_sdk/services/AppsEnabledService").AppsEnabledService;
-    })[];
+    }[];
 } | {
     providers: {
         provide: symbol;
         useClass: typeof import("./app_sdk/services/AppsDisabledService").AppsDisabledService;
     }[];
     imports: any[];
-    controllers: (typeof import("./chatwoot/api/chatwoot.locales.controller").ChatwootLocalesController | typeof import("./app_sdk/api/apps.controller").AppsController)[];
+    controllers: (typeof import("./app_sdk/api/apps.controller").AppsController | typeof import("./chatwoot/api/chatwoot.locales.controller").ChatwootLocalesController)[];
 };
